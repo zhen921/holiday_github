@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="spring_19_QueryAllUsers">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+        <property name="java-output-path" value="/spring_19_QueryAllUsers/build/classes"/>
+        <property name="context-root" value="holiday_travelling_14"/>
+    </wb-module>
+</project-modules>

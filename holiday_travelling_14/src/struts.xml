@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+ 
+    
+    <!--启用动态方法调用
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	-->
+    <package name="default"  extends="struts-default">
+    
+    <action name="regis" class="user.action.Register">
+	    <result name="registersuccess" >/login.jsp</result>
+	    <result name="registerfail" >/register_fail.jsp</result>
+	    <result name="loginsuccess" >/main_page.jsp</result>
+	    <result name="release" >/plan_release.jsp</result>
+	    <result name="loginfail" >/login_fail.jsp</result>
+	    <result name="goregister" >/user_register.jsp</result>
+	    <result name="adminloginok" >/admin_login_ok.jsp</result>
+    </action>
+    
+    <action name="plan" class="user.action.Plan">
+	    <result name="release" >/plan_release.jsp</result>
+	    <result name="has_result" >/release_results.jsp</result>
+	     <result name="open_recom" >/recom_results.jsp</result>
+	     <result name="no_result" >/release_noresults.jsp</result>
+	     <result name="release_fail" >/release_fail.jsp</result>
+    </action>
+    
+     <action name="personal" class="user.action.Personal">
+	    <result name="personal_infor" >/match_personal_infor.jsp</result>
+	    <result name="has_result" >/release_results.jsp</result>
+    </action>
+    
+    <action name="individual" class="user.action.Individual">
+	    <result name="friends" >/destined.jsp</result>
+    </action>
+    </package>
+</struts>
