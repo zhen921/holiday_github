@@ -21,7 +21,7 @@ public class UserInforDaoImpl implements UserInforDao{
 
 	@Override
 	public boolean queryExist(UserInfor u) {
-		List<UserInfor> users = hibernateTemplate.find("from UserInfor u where u.sno = '" + u.getSno() + "'");
+		List<UserInfor> users = (List<UserInfor>) hibernateTemplate.find("from UserInfor u where u.sno = '" + u.getSno() + "'");
 		if(users != null && users.size() > 0) {
 			return true;
 		}
@@ -41,9 +41,9 @@ public class UserInforDaoImpl implements UserInforDao{
 	public boolean loginCheck(UserInfor userInfor) {
 		List<UserInfor> users=new ArrayList<UserInfor>(); 
 		if(userInfor.getSex()==1)
-			users=hibernateTemplate.find("from UserInfor u where u.sno = '" + userInfor.getSno() + "' "+"and u.pwd='"+ userInfor.getPwd()+"'");
+			users=(List<UserInfor>) hibernateTemplate.find("from UserInfor u where u.sno = '" + userInfor.getSno() + "' "+"and u.pwd='"+ userInfor.getPwd()+"'");
 		else
-			users=hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");
+			users=(List<UserInfor>) hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");
 		if(users != null && users.size() > 0) {
 			return true;
 		}
