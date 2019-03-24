@@ -30,7 +30,7 @@ public class IndivMatchDaoImpl implements IndivMatchDao{
 	//拿到历史数据为了检查是否够分析特征的
 	@Override
 	public List<HistoryPlan>  checkCondition(String sno) {
-		List<HistoryPlan> list=hibernateTemplate.find("from HistoryPlan h where h.sno='"+sno+"'");
+		List<HistoryPlan> list=(List<HistoryPlan>) hibernateTemplate.find("from HistoryPlan h where h.sno='"+sno+"'");
 		return list;
 	}
 	
@@ -43,7 +43,7 @@ public class IndivMatchDaoImpl implements IndivMatchDao{
 	//取出数据去聚类
 	@Override
 	public List<PersonalTag> getPersonalTagList() {
-		return hibernateTemplate.find("from PersonalTag");
+		return (List<PersonalTag>) hibernateTemplate.find("from PersonalTag");
 	}
 	//将聚类算出的classtag存储
 	@Override
@@ -58,9 +58,9 @@ public class IndivMatchDaoImpl implements IndivMatchDao{
 		PersonalTag tag=(PersonalTag) hibernateTemplate.find("from PersonalTag h where h.sno='"+sno+"'").get(0);
 		List<PersonalTag> list;
 		if(tag.getCompanysex()!=3){
-				list=hibernateTemplate.find("from PersonalTag u where u.classtag = '" +tag.getClasstag()+ "' and u.companysex in ("+tag.getSelfsex()+",3)  and u.selfsex='"+tag.getCompanysex()+"'");
+				list=(List<PersonalTag>) hibernateTemplate.find("from PersonalTag u where u.classtag = '" +tag.getClasstag()+ "' and u.companysex in ("+tag.getSelfsex()+",3)  and u.selfsex='"+tag.getCompanysex()+"'");
 			}else{
-				list=hibernateTemplate.find("from PersonalTag u where u.classtag = '" +tag.getClasstag()+ "' and u.companysex in ("+tag.getSelfsex()+",3)");
+				list=(List<PersonalTag>) hibernateTemplate.find("from PersonalTag u where u.classtag = '" +tag.getClasstag()+ "' and u.companysex in ("+tag.getSelfsex()+",3)");
 			}
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).getSno().equals(tag.getSno())){

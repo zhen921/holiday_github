@@ -7,13 +7,18 @@ import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
+
 
 import user.model.UserInfor;
 import user.service.UserInforService;
 
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
+
+@Controller
 @Component("login")
 @Scope("prototype")
 public class Register extends ActionSupport implements ModelDriven {
@@ -36,7 +41,9 @@ public class Register extends ActionSupport implements ModelDriven {
 	}
 
 	// 用于验证登录信息
+	@RequestMapping("/login")
 	public String loginCheck() {
+		System.out.println("print");
 		/*
 		 * 用用户实体封装登录信息，也可能封装的是管理员信息
 		 */
@@ -63,6 +70,7 @@ public class Register extends ActionSupport implements ModelDriven {
 	}
 
 	// 跳转到主页页面
+	
 	public String goRegister() {
 		return "goregister";
 	}

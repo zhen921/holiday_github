@@ -41,7 +41,7 @@ public class ReleaseDaoImpl implements ReleaseDao {
 	@Override
 	//存储计划
 	public boolean releasePlan(UserPlan userPlan) {
-		List<UserPlan> users = hibernateTemplate.find("from UserPlan u where u.sno = '" + userPlan.getSno() + "'");
+		List<UserPlan> users = (List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.sno = '" + userPlan.getSno() + "'");
 		if(users != null && users.size() > 0) {
 			return true;
 		}
@@ -67,9 +67,9 @@ public class ReleaseDaoImpl implements ReleaseDao {
 	public List<UserPlan> getMatchPlan(UserPlan userPlan) {
 		List<UserPlan> list;
 		if(userPlan.getCompanysex()!=3){
-				list=hibernateTemplate.find("from UserPlan u where u.province = '" +userPlan.getProvince()+ "' and u.companysex in ("+userPlan.getSelfsex()+",3)  and u.selfsex='"+userPlan.getCompanysex()+"'");
+				list=(List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.province = '" +userPlan.getProvince()+ "' and u.companysex in ("+userPlan.getSelfsex()+",3)  and u.selfsex='"+userPlan.getCompanysex()+"'");
 			}else{
-				list=hibernateTemplate.find("from UserPlan u where u.province = '" +userPlan.getProvince()+ "' and u.companysex in ("+userPlan.getSelfsex()+",3)");
+				list=(List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.province = '" +userPlan.getProvince()+ "' and u.companysex in ("+userPlan.getSelfsex()+",3)");
 			}
 		hibernateTemplate.save(userPlan);
 		return list;

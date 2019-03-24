@@ -46,6 +46,19 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+     <servlet>
+         <servlet-name>springmvc</servlet-name>
+         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+          <init-param>  
+            <param-name>contextConfigLocation</param-name>  
+            <param-value>classpath:springmvc.xml</param-value>  
+        </init-param>  
+         <load-on-startup>1</load-on-startup>
+     </servlet>
+     <servlet-mapping>
+         <servlet-name>springmvc</servlet-name>
+         <url-pattern>/userback/*</url-pattern>
+     </servlet-mapping> 
   <filter>
     <filter-name>OpenSessionInView</filter-name>
     <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
@@ -54,6 +67,7 @@
     <filter-name>OpenSessionInView</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+	
  <!--  <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
