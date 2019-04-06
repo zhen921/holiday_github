@@ -15,14 +15,18 @@ nmsSigninApp.controller('signController', function ($scope, $http,$log,$timeout,
 	    //   $scope.username = angular.element("#username").value;
 	    // }
     	var password = Encrypt($scope.password);
-    	var data = 'username=' + $scope.username.toLowerCase() + '&password=' + password;
+    	//var data = 'sno=' + $scope.username.toLowerCase() + '&password=' + password;
+    	var user = {
+    			'sno':$scope.username,
+    			'pwd':password
+    		};
     	var url = "/holiday_travelling_14/userback/login";
     	$http({
     		method: 'POST',
     		url: url,
-    		data: data,
+    		data:user,
     		headers: {
-    			'Content-Type': 'application/x-www-form-urlencoded'
+    			'Content-Type':'application/json;charset=utf-8'
     		}
     	})
     	.success(function (data, status) {

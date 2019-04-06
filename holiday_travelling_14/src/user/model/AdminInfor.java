@@ -11,12 +11,18 @@ public class AdminInfor {
 	private int admin_id;
 	private String name;
 	private String password;
-	private String priority;
+	private String role;
 	
 	@Id
 	@GeneratedValue
 	public int getAdmin_id() {
 		return admin_id;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public void setAdmin_id(int admin_id) {
 		this.admin_id = admin_id;
@@ -33,11 +39,6 @@ public class AdminInfor {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPriority() {
-		return priority;
-	}
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
+
 	
 }
