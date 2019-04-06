@@ -5,10 +5,18 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.interceptor.validation.JSONValidationInterceptor;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 
@@ -26,7 +34,7 @@ public class Register extends ActionSupport implements ModelDriven {
 	 * 用于存放学号，作为旅游计划的主键
 	 */
 	static String snoid;
-	UserInfor userInfor = new UserInfor();
+	UserInfor userInfor;
 	UserInfor user;
 	UserInforService service;
 	//用于存放通知
@@ -41,12 +49,15 @@ public class Register extends ActionSupport implements ModelDriven {
 	}
 
 	// 用于验证登录信息
-	@RequestMapping("/login")
-	public String loginCheck() {
-		System.out.println("print");
+	@RequestMapping(value="/login",method = RequestMethod.POST,consumes = "application/json",produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public String loginCheck(@RequestBody UserInfor user) {
+		//@RequestParam(value="username",required=true)String username,@RequestParam(value="password",required=true)String password
 		/*
 		 * 用用户实体封装登录信息，也可能封装的是管理员信息
 		 */
+		System.out.println(user.getSno()+"---"+user.getPwd());
 		if (userInfor.getSex() == 1) {
 			if (service.loginCheck(userInfor)) {
 				//此处获得学号，是后期在别的操作中要用到
