@@ -4,20 +4,24 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>login</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/lib/sweet-alert/lib/sweet-alert.css" rel="stylesheet" >
     <script src="jquery-2.1.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="app/lib/angular/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.13/angular.js"></script>
     <script src="app/js/services.js"></script>
     <script src="app/js/controllers.js"></script>
-    <script src="app/js/signin_in.js"></script>
+    <script src="app/template/register/signin_in.js"></script>
     <script src="app/js/filters.js"></script>
     <script src="app/js/directives.js"></script>
+    <script src="app/lib/sweet-alert/lib/sweet-alert.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.4.13/angular-animate.js"></script>
+    <script src="https://cdn.bootcss.com/angular-ui-bootstrap/2.3.2/ui-bootstrap-tpls.js"></script>
     <script src="app/lib/crypto-js/crypto-js.js"></script>
 	</head>
 	<body data-ng-controller="signController">
         <img src="app/img/login_back.jpg" class="backgroud-img" style="opacity: 0.9; visibility: visible;">
         <div class="login-box">
-                <h1>hodliday traveling</h1>
+                <h1>holiday traveling</h1>
                 <form id="signinForm" name="signinForm" ng-model="signinForm" class="form-horizontal" method="POST">
                         <div class="form-group">
                         <div class="col-sm-12">
@@ -50,12 +54,12 @@
 	                        </div>
 	                    </div>           
                   <div class="row">
-                    <div ng-show="errorMsg" style="color: #e65151">{{error}}</div>               
+                    <div ng-show="errorMsg" style="color: #e65151">Wrong Sno or Password</div>               
                     <div class="col-sm-5">
-                     	<button class="btn btn-info btn-block" ng-click="login()">Login</button>
+                     	<button class="btn btn-info btn-block" ng-click="login()">sign in</button>
                   	</div>
                   	<div class="col-sm-5 col-sm-offset-2 ">
-                     	<button class="btn btn-info btn-block" ng-click="login()">Register</button>
+                     	<button class="btn btn-info btn-block" ng-click="register()">sign up</button>
                   	</div>
                   </div>           
                 </div>

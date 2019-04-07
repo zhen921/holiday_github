@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import user.dao.UserInforDao;
+import user.dto.UserInforDTO;
 import user.model.UserInfor;
 import user.service.UserInforService;
 
@@ -28,7 +29,7 @@ public class UserInforImpl implements UserInforService{
 		dao.addUser(u);
 	}
 
-	public UserInforDao getDao() {
+	public UserInforDao getDao() { 
 		return dao;
 	}
 
@@ -38,22 +39,8 @@ public class UserInforImpl implements UserInforService{
 	}
 
 	@Override
-	public boolean loginCheck(UserInfor userInfor) {
+	public UserInforDTO loginCheck(UserInfor userInfor) {
 		return dao.loginCheck(userInfor);
-	}
-
-	@Override
-	@Transactional
-	public List<String> getInform(UserInfor userInfor) {
-		List<String> list=new ArrayList<String >();
-		String str=dao.getInform(userInfor);
-		if(str.length()>5){
-			String[] spliter = str.split(",");
-			for(int i=1;i<spliter.length;i++){
-				list.add(spliter[i]);
-			}
-		}
-		return list;
 	}
 
 	@Override

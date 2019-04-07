@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 
+import user.dto.UserInforDTO;
 import user.model.UserInfor;
 import user.service.UserInforService;
 
@@ -39,12 +40,17 @@ public class Register extends ActionSupport implements ModelDriven {
 	UserInforService service;
 	//用于存放通知
 	static List<String> list=new ArrayList<String >();
-	public String register() {
-		if (service.queryExist(userInfor)) {
-			return "registerfail";
+	
+	
+	@RequestMapping(value="/register",method = RequestMethod.POST,consumes = "application/json",produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public String register(@RequestBody UserInfor user) {
+		if (service.queryExist(user)) {
+			return "{\"data\":\"exist\"}";
 		} else {
-			service.addUser(userInfor);
-			return "registersuccess";
+			service.addUser(user);
+			return  "{\"data\":\"success\"}";
 		}
 	}
 
@@ -52,32 +58,14 @@ public class Register extends ActionSupport implements ModelDriven {
 	@RequestMapping(value="/login",method = RequestMethod.POST,consumes = "application/json",produces="application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public String loginCheck(@RequestBody UserInfor user) {
+	public UserInforDTO loginCheck(@RequestBody UserInfor user) {
 		//@RequestParam(value="username",required=true)String username,@RequestParam(value="password",required=true)String password
-		/*
-		 * 用用户实体封装登录信息，也可能封装的是管理员信息
-		 */
-		System.out.println(user.getSno()+"---"+user.getPwd());
-		if (userInfor.getSex() == 1) {
-			if (service.loginCheck(userInfor)) {
-				//此处获得学号，是后期在别的操作中要用到
-				snoid=userInfor.getSno();
-				//此处获取相匹配人的学号
-				this.list=service.getInform(userInfor);
-				//此处获得个人信息，用于主页面显示
-				this.userInfor=service.getSelfInfor(userInfor);
-				return "loginsuccess";
-			} else {
-				return "loginfail";
-			}
-		} else {
-	  		if (service.loginCheck(userInfor)) {
-				return "adminloginok";
-			} else {
-				return "loginfail";
-			}
-		}
-
+		//此处获得学号，是后期在别的操作中要用到
+		UserInforDTO infor=service.loginCheck(user);
+		snoid=infor.getSno();
+		//此处获得个人信息，用于主页面显示
+		//this.userInfor=service.getSelfInfor(userInfor);
+		return infor;
 	}
 
 	// 跳转到主页页面

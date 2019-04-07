@@ -9,6 +9,9 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import user.dao.UserInforDao;
+import user.dto.UserInforDTO;
+import user.hibernate.util.SqlSet;
+import user.model.AdminInfor;
 import user.model.UserInfor;
 
 @Component 
@@ -38,26 +41,28 @@ public class UserInforDaoImpl implements UserInforDao{
 	}
 
 	@Override
-	public boolean loginCheck(UserInfor userInfor) {
+	public UserInforDTO loginCheck(UserInfor userInfor) {
+//		String query=SqlSet.checkLoginUser;
 		List<UserInfor> users=new ArrayList<UserInfor>(); 
-		if(userInfor.getSex()==1)
-			users=(List<UserInfor>) hibernateTemplate.find("from UserInfor u where u.sno = '" + userInfor.getSno() + "' "+"and u.pwd='"+ userInfor.getPwd()+"'");
-		else
-			users=(List<UserInfor>) hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");
+		List<AdminInfor> admin=new ArrayList<AdminInfor>(); 
+		UserInforDTO loginInfor =new UserInforDTO();
+		users=(List<UserInfor>) hibernateTemplate.find("from UserInfor u where u.sno = '" + userInfor.getSno() + "' "+"and u.pwd='"+ userInfor.getPwd()+"'");
 		if(users != null && users.size() > 0) {
-			return true;
-		}
-		return false;
+			loginInfor.setSno(users.get(0).getSno()) ;
+			loginInfor.setInform(users.get(0).getInform());
+			return loginInfor;
+		}else{
+			admin=(List<AdminInfor>) hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");
+			if(admin != null && admin.size() > 0){
+				loginInfor.setSno(admin.get(0).getName());
+				loginInfor.setRole(admin.get(0).getRole());
+				return loginInfor;
+			}else{
+				return loginInfor;
+			}
+		} 
 	}
 
-	@Override
-	public String getInform(UserInfor userInfor) {
-		UserInfor user=(UserInfor) hibernateTemplate.find("from UserInfor u where u.sno = '" + userInfor.getSno() + "'").get(0);
-		String str=user.getInform();
-		//user.setInform("abc");
-	//	this.hibernateTemplate.update(user);
-		return str;
-	}
 
 	@Override
 	public UserInfor getSelfInfor(UserInfor userInfor) {

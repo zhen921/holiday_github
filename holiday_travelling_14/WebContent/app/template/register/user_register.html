@@ -1,0 +1,98 @@
+<div class="modal-content">
+    <div class="modal-header bgm-cyan">
+        <h4 class="modal-title text-center">Sign Up</h4>
+    </div>
+    <div class="modal-body m-t-20">
+        <form class="form-horizontal" role="form" name="setForm">
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>Sno</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm" name="display"
+                            ng-model="modal.sno"
+                            ng-maxlength="16"
+                            ng-minlength="10"  
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>Password</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="password" class="form-control input-sm" name="display"
+                            ng-model="modal.pwd"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Email</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm" name="display"
+                            ng-model="modal.email"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Wechat</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm" name="display"
+                            ng-model="modal.wechat"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group">
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>School</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm" name="display"
+                            ng-model="modal.college"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>College</label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="text" class="form-control input-sm" name="display"
+                            ng-model="modal.depart"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Gender</label>
+                <div class="col-sm-6 p-t-10">
+                    <label class="radio radio-inline  m-r-20 p-t-0">
+                        <input type="radio" name="performanceFormat" ng-model="modal.sex" ng-click="gender(1)" value=1  readonly />                     
+                        boy
+                    </label>
+                    <label class="radio radio-inline  m-r-20 p-t-0">
+                        <input type="radio" name="performanceFormat" ng-model="model.sex" ng-click="gender(2)" value=2  readonly />                    
+                        girl
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="confirm()" ng-disabled="setForm.$pristine||(setForm.$dirty&&setForm.$invalid)">OK</button>
+        <button type="button" class="btn btn-info" ng-click="$close()">cancel</button>
+    </div>
+</div>
