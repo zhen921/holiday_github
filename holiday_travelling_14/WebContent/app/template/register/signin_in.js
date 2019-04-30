@@ -19,7 +19,7 @@ nmsSigninApp.controller('signController', function ($scope, $http,$log,$timeout,
     	})
     	.success(function (data, status) {
     		if(data.sno != null){
-    			//location.href = "/hems-web-ui" + "/index";
+    			location.href = "/holiday_travelling_14/app/pages-blank.html";
 	    		console.log(location.href);
 	    		sessionStorage.navs_array = "";
     		}else{
@@ -43,33 +43,6 @@ nmsSigninApp.controller('signController', function ($scope, $http,$log,$timeout,
             }        
         });
 	}
-	//$scope.errorMsg = true;
-	// $scope.detectCapsLock = function (event) {
-	//     if ($scope.capitalStatus) {
-	//       return;
-	//     }
-	//     var e = event || window.event;
-	//     var keyCode = e.keyCode || e.which;
-	//     var isShift = e.shiftKey || (keyCode == 16) || false;
-	//     if (((keyCode >= 65 && keyCode <= 90) && !isShift) || ((keyCode >= 97 && keyCode <= 122) && isShift)) {
-	//       $scope.capitalStatus = true;
-	//     } else {
-	//       $scope.capitalStatus = false;
-	//     }
-	// }
-	// $scope.upCapsLock = function (event) {
- //    var e = event || window.event;
-	//     if (e.keyCode == 20 && capital) {
-	//       $scope.capitalStatus = !$scope.capitalStatus;
-	//     }
-	//     return false;
-	// }
-	// $scope.setCapitalNone = function (event) {
-	//     $scope.capitalStatus = false;
-	// }
-	// $scope.initialPassword = function () {
-	//     $scope.password = "";
-	// }
 });
 var Encrypt = function (toEncode) {
   	var password = CryptoJS.SHA256(toEncode);
