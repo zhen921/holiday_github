@@ -19,9 +19,10 @@ nmsSigninApp.controller('signController', function ($scope, $http,$log,$timeout,
     	})
     	.success(function (data, status) {
     		if(data.sno != null){
-    			location.href = "/holiday_travelling_14/app/pages-blank.html";
+				var str = JSON.stringify(data); 
+				sessionStorage.stu = str; 
+    			location.href = "/holiday_travelling_14/app/index.html";
 	    		console.log(location.href);
-	    		sessionStorage.navs_array = "";
     		}else{
     			$scope.errorMsg=true;
     		}
