@@ -17,7 +17,8 @@ public class PersonInforServiceImplTest {
 	public void testGetPersonalInforBySno() {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
 		PersonInforServiceImpl service= (PersonInforServiceImpl) ctx.getBean("personInforServiceImpl");
-		UserInfor list=service.getPersonalInforBySno("2003");
+		 UserInfor list=service.getPersonalInforBySno("1234");
+		 System.out.println(list.toString());
 	}
 
 }

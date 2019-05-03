@@ -39,18 +39,16 @@ public class Register extends ActionSupport implements ModelDriven {
 	UserInfor user;
 	UserInforService service;
 	//用于存放通知
+	
 	static List<String> list=new ArrayList<String >();
-	
-	
 	@RequestMapping(value="/register",method = RequestMethod.POST,consumes = "application/json",produces="application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public String register(@RequestBody UserInfor user) {
+	public void register(@RequestBody UserInfor user) throws Exception {
 		if (service.queryExist(user)) {
-			return "{\"data\":\"exist\"}";
+			throw new Exception("The sno already in use!");
 		} else {
 			service.addUser(user);
-			return  "{\"data\":\"success\"}";
 		}
 	}
 
