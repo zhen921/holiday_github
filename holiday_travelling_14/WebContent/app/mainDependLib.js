@@ -16,5 +16,6 @@
         +'<script src="template/dashboard/dashboardController.js"></script>'
         +'<script src="mainPageController.js"></script>'
         +'<script src="template/profile/profileController.js"></script>'
+        +'<script src="lib/crypto-js/crypto-js.js"></script>'
         );
     
