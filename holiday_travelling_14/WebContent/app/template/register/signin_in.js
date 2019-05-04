@@ -50,15 +50,9 @@ var Encrypt = function (toEncode) {
   	return password.toString();
 }
 var registerController = function($scope,$log,$timeout,$http,$filter,$uibModal,$uibModalInstance){
-	 $scope.modal={};
-	 var temPwd;
-	 $scope.modal.sex = 1;
-	 $scope.gender=function(gender){
-		 if(gender == 2)
-			 $scope.modal.sex = 2;
-		 else
-			 $scope.modal.sex = 1;
-	 }
+	$scope.modal={};
+	var temPwd;
+	$scope.modal.sex = 1;
 	 $scope.confirm = function(){
 		 url="/holiday_travelling_14/userback/register";
 		 temPwd=$scope.modal.pwd;
@@ -72,25 +66,22 @@ var registerController = function($scope,$log,$timeout,$http,$filter,$uibModal,$
 	    		}
 	    	})
 	    	.success(function (data, status) {
-	    		if(data.data=="success"){
-	    			swal({
-	    				title:"successed to sign up",
-	    				type:"success",
-	    				text:"now,you can try to login it",
-	    				button:"ok"
-	    			});
-	    			$uibModalInstance.close();
-	    		}else{
-	    			swal({
-	    				title:"failed to sign up",
-	    				type:"error",
-	    				text:"The account already exists",
-	    				button:"ok"
-	    			});
-	    			$scope.modal.pwd=temPwd;
-	    		}
+				swal({
+					title:"successed to sign up",
+					type:"success",
+					text:"now,you can try to login it",
+					button:"ok"
+				});
+				$uibModalInstance.close();
 	    	})
 	    	.error(function (data, status) {
+				swal({
+					title:"failed to sign up",
+					type:"error",
+					text:"The account already exists",
+					button:"ok"
+				});
+				$scope.modal.pwd=temPwd;
 	    		$log.info("Failed to register");
 	    	});
 	 }

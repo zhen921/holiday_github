@@ -1,0 +1,68 @@
+<div class="modal-content">
+    <div class="modal-header bgm-cyan">
+        <h4 class="modal-title text-center">Modify Password</h4>
+    </div>
+    <div class="modal-body m-t-20">
+        <form class="form-horizontal" role="form" name="setForm">
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">
+                    <span style="color:rgb(236, 32, 14);">*</span>Current password
+                </label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="password" ng-blur="checkOldPwd()" class="form-control input-sm" 
+                            name="display"
+                            ng-model="modal.current"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                    <help-block ng-show="oldPwdMessage">
+                        <span style="color:red">wrong password!</span>
+                    </help-block>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">
+                    <span style="color:rgb(156, 21, 8);">*</span>New password
+                </label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="password" ng-blur="pwdNotEqual()" class="form-control input-sm" 
+                            name="display"
+                            ng-model="modal.new"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                </div>
+            </div>  
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">
+                    <span style="color:rgb(156, 21, 8);">*</span>Re-entry password
+                </label>
+                <div class="col-sm-6">
+                    <div class="fg-line">
+                        <input type="password" ng-blur="pwdNotEqual()" class="form-control input-sm" 
+                            name="display"
+                            ng-model="modal.renew"
+                            ng-maxlength="16"
+                            ng-minlength="6" 
+                            required>
+                    </div>
+                    <help-block ng-show="pwdNotEqualShow">
+                        <span style="color:red">The entered password is inconsistent!</span>
+                    </help-block>
+                </div>
+            </div>     
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" 
+            class="btn btn-info" 
+            ng-click="confirm()" 
+            ng-disabled="setForm.$pristine||(setForm.$dirty&&setForm.$invalid)||pwdNotEqualShow||oldPwdMessage">
+            OK</button>
+        <button type="button" class="btn btn-info" ng-click="$close()">cancel</button>
+    </div>
+</div>
