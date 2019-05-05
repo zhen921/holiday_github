@@ -51,6 +51,7 @@ public class UserInforDaoImpl implements UserInforDao{
 		if(users != null && users.size() > 0) {
 			loginInfor.setSno(users.get(0).getSno()) ;
 			loginInfor.setInform(users.get(0).getInform());
+			loginInfor.setSex((users.get(0).getSex()));
 			return loginInfor;
 		}else{
 			admin=(List<AdminInfor>) hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");

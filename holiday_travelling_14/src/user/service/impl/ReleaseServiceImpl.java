@@ -25,15 +25,19 @@ public class ReleaseServiceImpl implements ReleaseService {
 	Register register;
 	ComputeMatch match=new ComputeMatch();
 	SendInformEmail sie=new SendInformEmail();
+	
 	@Override
 	public List<Province> getProvince() {
 		return dao.getProvince();
+	}
+	@Override
+	public List<City> getCity(String code) {
+		return dao.getCity(code);
 	}
 
 	public ReleaseDao getDao() {
 		return dao;
 	}
-
 	@Resource(name = "releaseDaoImpl")
 	public void setDao(ReleaseDao dao) {
 		this.dao = dao;
@@ -42,7 +46,6 @@ public class ReleaseServiceImpl implements ReleaseService {
 	public Register getRegister() {
 		return register;
 	}
-
 	@Resource(name = "login")
 	public void setRegister(Register register) {
 		this.register = register;
@@ -50,36 +53,16 @@ public class ReleaseServiceImpl implements ReleaseService {
 
 	@Override
 	public boolean releasePlan(UserPlan userPlan) {
-		boolean flag=true;
-		//学号是在登录时保存的，保存在  
-		String sno=Register.getSnoid();
-		userPlan.setSelfsex(dao.getSex(sno));
-		userPlan.setSno(sno);
-		userPlan.setHot(0);
-		flag=dao.releasePlan(userPlan);
-		return flag;
-	}
-
-	@Override
-	public List<City> getCity(String code) {
-		return dao.getCity(code);
+		return dao.releasePlan(userPlan);
 	}
 
 	@Override
 	@Transactional
 	public List<UserPlan> getMatchPlan(UserPlan userPlan) {
-		/*
-		 * 拿到省市的目的是为了让数据库存储的是名字，而不是省市编码
-		 */
-		Province province=dao.getProvinceName(userPlan.getProvince());
-		City city=dao.getCityName(userPlan.getCity());
-		userPlan.setProvince(province.getName());
-		userPlan.setCity(city.getName());
 		
-		/*
-		 * 从数据库查询符合基本条件的,并且存储数据是在查询之后做
-		 */
+		 //从数据库查询符合基本条件的,并且存储数据是在查询之后做
 		List<UserPlan> list=dao.getMatchPlan(userPlan);
+		
 		List<UserPlan>  matchlist=new  ArrayList<UserPlan>();
 		if(list!=null&&list.size()>0){
 			//匹配到有结果

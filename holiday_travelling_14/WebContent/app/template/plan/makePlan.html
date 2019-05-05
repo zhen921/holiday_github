@@ -1,0 +1,154 @@
+
+            <div class="row page-titles">
+                <div class="col-md-6 col-md-4 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0" style="padding-left: 50px;">Make a Plan</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-xlg-10 col-md-10" style="padding-left: 60px;">
+                    <form class="form-horizontal form-material">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>Title</label>
+                                        <div class="col-md-12 p-t-10">
+                                            <input type="text"
+                                                ng-model="modal.title"
+                                                class="form-control form-control-line"
+                                                required>
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-sm-12"><span style="color:red;">*</span>Select Province</label>
+                                        <div class="col-sm-12 p-t-10">
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.province" ng-change="getCityName()">
+                                                <option ng-repeat="item in provinceList" 
+                                                    value={{item.name}}>{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-sm-12"><span style="color:red;">*</span>Select City</label>
+                                        <div class="col-sm-12 p-t-10">
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.city">
+                                                <option ng-repeat="item in cityList" 
+                                                    value={{item.name}}>{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6">Target View</label>
+                                        <div class="col-md-12 p-t-10">
+                                            <input type="text" 
+                                                ng-model="modal.view"    
+                                                class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>出发时间:</label>
+                                        <div class="col-md-12 p-t-10">
+                                            <input type="number"  
+                                                ng-model="modal.startdate"
+                                                class="form-control form-control-line"
+                                                required>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row col-md-12">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>驴友性别:</label>
+                                        <div class="col-md-12 p-t-10">
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.companysex">
+                                                <option ng-repeat="item in genderList" 
+                                                    value={{item.value}}>{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>预计消费金额:</label>
+                                        <div class="col-md-12 p-t-10">
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.totalcost">
+                                                <option ng-repeat="item in costList" 
+                                                    value={{item.value}}>{{item.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row col-md-12">
+                                    
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>预计花费时间:</label>
+                                        <div class="col-md-8 p-t-10">
+                                            <input type="number" 
+                                                ng-model="modal.totaltime"
+                                                class="form-control form-control-line"
+                                                required>
+                                        </div>
+                                        <div class="col-md-4 p-t-20" style="padding-left: 0px;">
+                                            <span>(单位：天)</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-md-6"><span style="color:red;">*</span>预计人数:</label>
+                                        <div class="col-md-8 p-t-10">
+                                            <input type="number" 
+                                                ng-model="modal.totalperson" 
+                                                class="form-control form-control-line"
+                                                required>
+                                        </div>
+                                        <div class="col-md-4 p-t-20" style="padding-left: 0px;">
+                                            <span>(单位：个人)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="form-group col-md-12">
+                                    <label class="col-md-12">补充内容:</label>
+                                    <div class="col-md-11 p-t-10">
+                                        <textarea rows="5"
+                                            ng-model="modal.introduce"  
+                                            class="form-control form-control-line"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-5" style="float:right;">
+                                        <button class="btn btn-success"
+                                            ng-click="releasePlan()" 
+                                            style="padding-left: 32px;margin-left: 40px;padding-right: 32px;">
+                                            Release Plan</button>
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </form>
+                </div>
+            </div>

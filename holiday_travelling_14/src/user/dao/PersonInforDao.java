@@ -13,4 +13,5 @@ public interface PersonInforDao {
 	 */
 	public void saveProfileBySno(UserInfor profile);
 
+
 }

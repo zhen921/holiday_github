@@ -77,11 +77,11 @@
                                     aria-hidden="true"></i>Profile</a>
                         </li>
                         <li>
-                            <a href="table-basic.html"
+                            <a  data-ui-sref='makePlan'
                                 data-ui-sref-active="active"
                                 data-ng-click="mactrl.sidebarStat($event)"
                                 class="waves-effect"><i class="fa fa-table m-r-10"
-                                    aria-hidden="true"></i>Basic Table</a>
+                                    aria-hidden="true"></i>Make Plan</a>
                         </li>
                         <li>
                             <a href="table-basic.html" 
@@ -94,8 +94,11 @@
                 </nav>
             </div>
         </aside>
-        <section id="content" class="content" class="page-view" data-ui-view>
-        </section> 
+        <div class="page-wrapper">
+            <div class="container-fluid" style="padding-bottom: 20px;margin-top: -20px;border-top-style: solid;border-top-width: 0px;padding-top: 30px;">
+                <div data-ui-view></div>
+            </div>
+        </div> 
     </div>
     <script src="lib/assets/plugins/jquery/jquery.min.js"></script>
 

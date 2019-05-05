@@ -49,12 +49,6 @@ public class ReleaseDaoImpl implements ReleaseDao {
 	}
 
 	@Override
-	public int getSex(String sno) {
-		UserInfor user=(UserInfor) hibernateTemplate.find("from UserInfor u where u.sno = '" + sno + "'").get(0);
-		return  user.getSex();
-	}
-
-	@Override
 	public List<City> getCity(String code) {
 		return (List<City>)hibernateTemplate.find("from City u where u.provincecode = '" + code + "'");
 	}
@@ -75,15 +69,6 @@ public class ReleaseDaoImpl implements ReleaseDao {
 		return list;
 	}
 
-	@Override
-	public Province getProvinceName(String province) {
-		return (Province) hibernateTemplate.find("from Province u where u.code = '" + province + "'").get(0);
-	}
-
-	@Override
-	public City getCityName(String city) {
-		return (City) hibernateTemplate.find("from City u where u.code = '" + city + "'").get(0);
-	}
 
 	@Override
 	public String informMatch(String sno, String sno2) {

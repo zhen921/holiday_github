@@ -12,10 +12,12 @@
         +'<script src="https://cdn.bootcss.com/angular.js/1.4.13/angular-animate.js"></script>'
         +'<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>'
         +'<script src="https://cdn.bootcss.com/angular-ui-bootstrap/2.3.2/ui-bootstrap-tpls.js"></script>'
-        
+        +'<script src="lib/crypto-js/crypto-js.js"></script>'
+
         +'<script src="template/dashboard/dashboardController.js"></script>'
         +'<script src="mainPageController.js"></script>'
         +'<script src="template/profile/profileController.js"></script>'
-        +'<script src="lib/crypto-js/crypto-js.js"></script>'
+        +'<script src="template/plan/makePlanController.js"></script>'
+        
         );
     

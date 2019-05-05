@@ -8,6 +8,7 @@ public interface PersonInforService {
 
 	public UserInfor getPersonalInforBySno(String parameter);
 
+
 	/**
 	 * @param profile
 	 */

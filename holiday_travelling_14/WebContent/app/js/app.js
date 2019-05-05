@@ -21,9 +21,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'template/profile/profile.html',
         controller : 'profileController'
     })
-    .state ('system.User', {
-        url: '/user',
-        templateUrl: 'templates/system/user.html',
-        controller : 'systemUserController'
+    .state ('makePlan', {
+        url: '/makePlan',
+        templateUrl: 'template/plan/makePlan.html',
+        controller : 'makePlanController'
     })
  });
