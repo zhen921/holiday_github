@@ -20,7 +20,9 @@ public class Individual extends ActionSupport {
 	private IndivMatchService service;
 	List<UserInfor> users;
 	public String checkCondition(){
-		String sno=Register.getSnoid();
+		
+		//学号是传进来度
+		String sno="";
 		//标签是否存在，不存在就创建，存在就更新
 		boolean flag=service.checkCondition(sno);
 		//聚类分析

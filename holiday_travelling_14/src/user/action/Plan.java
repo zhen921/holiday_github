@@ -1,14 +1,9 @@
 package user.action;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -19,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-
 import user.model.*;
 import user.service.ReleaseService;
 
 @Controller
 @Component("release")
 @Scope("prototype")
-public class Plan extends ActionSupport implements ModelDriven {
+public class Plan{
 	List<UserPlan> matchList;
 	List<UserPlan> recomList;
 	ReleaseService service;
@@ -76,11 +68,6 @@ public class Plan extends ActionSupport implements ModelDriven {
 		//匹配到的是这些人的计划，到前台做展示
 		this.matchList = service.getRecom(lists);
 		return "open_recom";
-	}
-
-	@Override
-	public Object getModel() {
-		return null;
 	}
 
 
