@@ -24,39 +24,31 @@ import user.model.UserPlan;
 public class ReleaseDaoImpl implements ReleaseDao {
 	private HibernateTemplate hibernateTemplate;
 
+	//get province list
 	@Override
 	public List<Province> getProvince() {
 		return (List<Province>) hibernateTemplate.find("from Province");
 	}
 
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
-
-	@Resource
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
-
-	@Override
-	//存储计划
-	public boolean releasePlan(UserPlan userPlan) {
-		List<UserPlan> users = (List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.sno = '" + userPlan.getSno() + "'");
-		if(users != null && users.size() > 0) {
-			return true;
-		}
-		return false;
-	}
-
+	//get city list 
 	@Override
 	public List<City> getCity(String code) {
 		return (List<City>)hibernateTemplate.find("from City u where u.provincecode = '" + code + "'");
 	}
 
-	/*
-	 * 此处做基本匹配，匹配必要要求，性别，省份，返回匹配列表
-	 * @see user.dao.ReleaseDao#getMatchPlan(user.model.UserPlan)
-	 */
+	//检查计划是否重复
+	@Override
+	public List<UserPlan> checkRepeatPlan(String sno) {
+		return (List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.sno = '" + sno + "'");
+	}
+
+	//save plan
+	@Override
+	public void saveReleasePlan(UserPlan plan) {
+		hibernateTemplate.save(plan);
+	}
+	
+	  //此处做基本匹配，匹配必要要求，性别，省份，返回匹配列表
 	@Override
 	public List<UserPlan> getMatchPlan(UserPlan userPlan) {
 		List<UserPlan> list;
@@ -65,11 +57,14 @@ public class ReleaseDaoImpl implements ReleaseDao {
 			}else{
 				list=(List<UserPlan>) hibernateTemplate.find("from UserPlan u where u.province = '" +userPlan.getProvince()+ "' and u.companysex in ("+userPlan.getSelfsex()+",3)");
 			}
-		hibernateTemplate.save(userPlan);
 		return list;
 	}
 
 
+	
+	/**
+	 * sno 是匹配者 sno2是当前计划的，此处获取匹配者的email,并给匹者留通知
+	 */
 	@Override
 	public String informMatch(String sno, String sno2) {
 		UserInfor user=(UserInfor) hibernateTemplate.find("from UserInfor u where u.sno = '" + sno + "'").get(0);
@@ -89,6 +84,16 @@ public class ReleaseDaoImpl implements ReleaseDao {
 		recom.add(user);
 		}
 		return recom;
+	}
+
+
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	@Resource
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
 	}
 
 }

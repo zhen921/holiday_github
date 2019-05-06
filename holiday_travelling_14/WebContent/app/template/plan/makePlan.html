@@ -1,10 +1,33 @@
 
-            <div class="row page-titles">
+            
+            <div ng-show="tableShow">
+                <div class="row page-titles">
+                    <div class="col-md-6 col-md-4 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Match Results</h3>
+                    </div>
+                </div>
+                <!-- <a href="" style="font-weight: 400;font-style: italic;text-decoration:underline"
+                    >Modify Plan</a>
+                </div> -->
+              
+                <div style="padding-left: 800px;">
+                    <button class="btn btn-info" ng-click="tableIntoModifyPlan()">Modify Plan</button>
+                    <button class="btn btn-info" >Refresh Data</button>
+                </div>
+                <div class="grid" ui-grid="gridOptions"
+                    ui-grid-selection 
+                    ui-grid-resize-columns 
+                    ui-grid-auto-resize 
+                    ui-grid-pagination >
+                </div>
+            </div>
+
+            <div class="row page-titles" ng-hide="tableShow">
                 <div class="col-md-6 col-md-4 col-8 align-self-center">
                     <h3 class="text-themecolor m-b-0 m-t-0" style="padding-left: 50px;">Make a Plan</h3>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" ng-hide="tableShow">
                 <div class="col-lg-10 col-xlg-10 col-md-10" style="padding-left: 60px;">
                     <form class="form-horizontal form-material">
                         <div class="card">

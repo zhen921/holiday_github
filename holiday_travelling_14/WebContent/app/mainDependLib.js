@@ -13,6 +13,7 @@
         +'<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>'
         +'<script src="https://cdn.bootcss.com/angular-ui-bootstrap/2.3.2/ui-bootstrap-tpls.js"></script>'
         +'<script src="lib/crypto-js/crypto-js.js"></script>'
+        +'<script src="lib/ui-grid/ui-grid.js"></script>'
 
         +'<script src="template/dashboard/dashboardController.js"></script>'
         +'<script src="mainPageController.js"></script>'

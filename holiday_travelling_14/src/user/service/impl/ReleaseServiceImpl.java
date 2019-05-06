@@ -22,9 +22,8 @@ import user.service.ReleaseService;
 @Component
 public class ReleaseServiceImpl implements ReleaseService {
 	ReleaseDao dao;
-	Register register;
 	ComputeMatch match=new ComputeMatch();
-	SendInformEmail sie=new SendInformEmail();
+	SendInformEmail sendEmail=new SendInformEmail();
 	
 	@Override
 	public List<Province> getProvince() {
@@ -43,55 +42,54 @@ public class ReleaseServiceImpl implements ReleaseService {
 		this.dao = dao;
 	}
 
-	public Register getRegister() {
-		return register;
-	}
-	@Resource(name = "login")
-	public void setRegister(Register register) {
-		this.register = register;
-	}
-
 	@Override
-	public boolean releasePlan(UserPlan userPlan) {
-		return dao.releasePlan(userPlan);
+	public List<UserPlan> checkRepeatPlan(String sno) {
+		return dao.checkRepeatPlan(sno);
 	}
 
 	@Override
 	@Transactional
 	public List<UserPlan> getMatchPlan(UserPlan userPlan) {
-		
-		 //从数据库查询符合基本条件的,并且存储数据是在查询之后做
 		List<UserPlan> list=dao.getMatchPlan(userPlan);
-		
-		List<UserPlan>  matchlist=new  ArrayList<UserPlan>();
+		//遍历去除匹配到的自己的计划
+		Iterator<UserPlan> iterator = list.iterator(); 
+		while (iterator.hasNext()){ 
+			UserPlan obj = iterator.next(); 
+			if(userPlan.getSno()==obj.getSno())
+				iterator.remove();
+		}
 		if(list!=null&&list.size()>0){
-			//匹配到有结果
-			List<UserPlan> userlist=new ArrayList<UserPlan>();
 			//计算了匹配度,目前存放在hot里，但是还缺一个排序，和限制人数
-			userlist=match.getMatchResult(userPlan, list);
-			
-			/*
-			 * 给匹配人发送匹配通知
-			 */
-			for (Iterator iterator = userlist.iterator(); iterator
-					.hasNext();) {
-				UserPlan type = (UserPlan) iterator.next();
-				if(type.getHot()>80){
-					String email=dao.informMatch(type.getSno(),userPlan.getSno());
-					if(email!=null)
-						sie.sendEmai(email);
-				}
-			}
-			return userlist;
+			return match.getMatchResult(userPlan, list);
 		}else{
 			//无匹配
-			return  matchlist;  
+			return  list;  
 		}
 	}
 
 	@Override
 	public List<UserPlan> getRecom(List<String> lists) {
 		return dao.getRecom(lists);
+	}
+
+	@Override
+	@Transactional
+	public void saveReleasePlan(UserPlan plan) {
+		dao.saveReleasePlan(plan);
+	}
+
+	// 给匹配人发送匹配通知
+	@Transactional
+	@Override
+	public void sendEmaiToMatch(List<UserPlan> matchList, String sno) {
+			for (Iterator iterator = matchList.iterator(); iterator.hasNext();) {
+				UserPlan type = (UserPlan) iterator.next();
+				if(type.getHot()>80){
+					String email=dao.informMatch(type.getSno(),sno);
+					if(email!=null)
+						sendEmail.sendEmai(email);
+				}
+			}
 	}
 
 }

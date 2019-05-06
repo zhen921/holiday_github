@@ -12,7 +12,7 @@ public interface ReleaseDao {
 	public List<Province> getProvince();
 
 	//其实就检查了一下是不是重复发的
-	public boolean releasePlan(UserPlan userPlan);
+	public List<UserPlan> checkRepeatPlan(String sno);
 
 	//填写计划用到的城市
 	public List<City> getCity(String code);
@@ -24,6 +24,9 @@ public interface ReleaseDao {
 	public String informMatch(String sno, String sno2);
 
 	public List<UserPlan> getRecom(List<String> lists);
+
+	//save plan
+	public void saveReleasePlan(UserPlan plan);
 
 		
 }

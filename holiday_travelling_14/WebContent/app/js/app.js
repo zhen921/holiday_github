@@ -6,7 +6,12 @@ var myApp=angular.module('myApp', [
     'myApp.directives',
     'ui.router',
     'ui.bootstrap',
-    'ngAnimate'
+    'ngAnimate',
+    'ui.grid',
+    'ui.grid.pagination',
+    'ui.grid.resizeColumns',
+    'ui.grid.autoResize',
+    'ui.grid.selection'
 ]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {

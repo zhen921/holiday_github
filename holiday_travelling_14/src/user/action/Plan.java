@@ -46,6 +46,30 @@ public class Plan{
 		return service.getCity(provinceCode);
 	}
 	
+	
+	
+	 // 如果有发布计划则获取匹配列表
+	@RequestMapping(value="/checkExistPlan",method = RequestMethod.GET,produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<UserPlan> getMatchListIfExist(@RequestParam String sno) throws Exception {
+		List<UserPlan> selfPlan=service.checkRepeatPlan(sno);
+		if (selfPlan!=null && selfPlan.size() > 0) {
+			List<UserPlan> matchList=service.getMatchPlan(selfPlan.get(0));
+			return matchList;
+		} else {
+			throw new  Exception("plan not exist");
+		}
+	}
+	
+	 // 如果有发布计划则获取匹配列表
+	@RequestMapping(value="/tableIntoModifyPlan",method = RequestMethod.GET,produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<UserPlan> getSelfPlan(@RequestParam String sno) throws Exception {
+		return service.checkRepeatPlan(sno);
+	}
+
 	/*
 	 * 此处往数据库里写入计划，预计匹配也会写在这部分
 	 */
@@ -54,12 +78,17 @@ public class Plan{
 	@ResponseBody
 	public List<UserPlan> releasePlan(@RequestBody UserPlan plan) throws Exception {
 		// 查询是否发布的已有计划
-		if (service.releasePlan(plan)) {
+		List<UserPlan> selfPlan=service.checkRepeatPlan(plan.getSno());
+		if (selfPlan!=null && selfPlan.size() > 0) {
 			 throw new  Exception("plan exist");
 		} else {
-			return service.getMatchPlan(plan);
+			service.saveReleasePlan(plan);
+			List<UserPlan> matchList=service.getMatchPlan(plan);
+			service.sendEmaiToMatch(matchList,plan.getSno());
+			return matchList;
 		}
 	}
+
 
 	//作为登录后消息里推荐人的计划显示
 	public String getMatchInfor() {
