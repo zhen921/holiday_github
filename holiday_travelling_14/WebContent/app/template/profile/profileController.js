@@ -1,9 +1,16 @@
-myApp.controller('profileController', 
-   ["$scope","$http","$log","$timeout","$window","$uibModal",
-   function($scope,$http, $log,$timeout,$window,$uibModal,$state) {
-	   getProfile();
+myApp.controller('profileController',profileController);
+function profileController($scope,$http,$log,$uibModal) {
+	   	getProfile();
+	   	$scope.updateProfile = updateProfile;
+	   	$scope.modifyPwd = modifyPwd;
+		$scope.uploadFile = uploadFile
 		
-		$scope.updateProfile = function(){
+		function uploadFile($file) {
+			$scope.file=$file;
+			$scope.fileName = $file[0].name;
+		};
+
+		function updateProfile(){
 			url = "/holiday_travelling_14/userback/saveProfileBySno";
 			$http({
 				method: 'PUT',
@@ -19,21 +26,21 @@ myApp.controller('profileController',
 			});
 		}
 
-		$scope.modifyPwd = function () {
+		function modifyPwd() {
 			$uibModal.open({
-					templateUrl: 'template/profile/modifyPwd.html',
-					controller: modifyPwdController,
-					backdrop : 'static',
-					size:'md',
-					resolve: {
-						 data: function() {
-							  return $scope.modal;
-						 }
-					}        
+				templateUrl: 'template/profile/modifyPwd.html',
+				controller: modifyPwdController,
+				backdrop : 'static',
+				size:'md',
+				resolve: {
+						data: function() {
+							return $scope.modal;
+						}
+				}        
 			  });
 		}
-	   
-	   function getProfile(){
+
+	    function getProfile(){
 		    //get session data
 		    str = sessionStorage.stu; 
 		    obj = JSON.parse(str);
@@ -48,8 +55,8 @@ myApp.controller('profileController',
 		    .error(function (data, status) {
 		       $log.info("Failed to get data; status:" + status);
 		    });
-		 }
-}]);
+		}
+};
 
 var modifyPwdController = function($scope,data,$log,$http,$uibModal,$uibModalInstance){
 	var profileData = data;
@@ -91,6 +98,6 @@ var modifyPwdController = function($scope,data,$log,$http,$uibModal,$uibModalIns
 	var Encrypt = function (toEncode) {
 		var password = CryptoJS.SHA256(toEncode);
 		return password.toString();
- }
+ 	}
 }
 modifyPwdController.$inject = ["$scope","data","$log","$http","$uibModal","$uibModalInstance"];   	

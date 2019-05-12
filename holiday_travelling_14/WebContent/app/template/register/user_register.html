@@ -1,47 +1,100 @@
-<div class="modal-content">
-    <div class="modal-header bgm-cyan">
-        <h4 class="modal-title text-center">Sign Up</h4>
+<div class="modal-content" content="text/html; charset=UTF-8">
+    <div class="modal-header bgm-cyan" >
+        <h4 class="modal-title text-center">注册</h4>
     </div>
     <div class="modal-body m-t-20">
         <form class="form-horizontal" role="form" name="setForm">
             <div class="form-group">
-                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>Sno</label>
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>学号</label>
                 <div class="col-sm-6">
                     <div class="fg-line">
-                        <input type="text" class="form-control input-sm" name="display"
+                        <input type="text" class="form-control input-sm" 
+                            name="sno"
                             ng-model="modal.sno"
-                            ng-maxlength="16"
-                            ng-minlength="10"  
+                            ng-maxlength="6"
                             required>
                     </div>
+                    <help-block ng-show="setForm.sno.$dirty&&setForm.sno.$invalid">
+                        <span style="color:red">要求6-16位数字</span>!</span>
+                    </help-block>
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>Password</label>
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>密码</label>
                 <div class="col-sm-6">
                     <div class="fg-line">
-                        <input type="password" class="form-control input-sm" name="display"
+                        <input type="password" class="form-control input-sm"
+                            ng-blur="pwdNotEqual()" 
+                            name="password"
                             ng-model="modal.pwd"
                             ng-maxlength="16"
                             ng-minlength="6" 
                             required>
                     </div>
+                    <help-block ng-show="setForm.password.$dirty&&setForm.password.$invalid">
+                        <span style="color:red">要求6-16位</span>!</span>
+                    </help-block>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Email</label>
-                <div class="col-sm-6">
+                <label for="name" style="left: 5px;" class="col-sm-5 control-label">
+                    <span style="color:red;">*</span>再次输入密码
+                </label>
+                <div class="col-sm-5">
                     <div class="fg-line">
-                        <input type="text" class="form-control input-sm" name="display"
-                            ng-model="modal.email"
+                        <input type="password" class="form-control input-sm" 
+                            ng-blur="pwdNotEqual()"
+                            name="display"
+                            ng-model="rePwd"
                             ng-maxlength="16"
                             ng-minlength="6" 
                             required>
                     </div>
+                    <help-block ng-show="pwdNotEqualShow">
+                        <span style="color:red">前后密码不一致!</span>
+                    </help-block>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>邮箱</label>
+                <div class="col-sm-6">
+                    <div class=" input-group">
+                        <input type="email" class="form-control input-sm" 
+                            name="email"
+                            ng-model="modal.email"
+                            required>
+                        <span class="input-group-btn">
+                            <button type="button"
+                                ng-click="sendVerificationCode()" 
+                                ng-disabled="setForm.email.$pristine||(setForm.email.$dirty&&setForm.email.$invalid)"
+                                class="btn btn-info" 
+                                style="padding-bottom: 2px;">
+                                发送验证码
+                            </button>
+                        </span>   
+                    </div>
+                    <help-block ng-show="setForm.email.$dirty&&setForm.email.$invalid">
+                        <span style="color:red">请填写符合规范的邮箱!</span>
+                    </help-block>
                 </div> 
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Wechat</label>
+                <label class="col-sm-6 control-label"><span style="color:red;">*</span>邮箱接收到的验证码:</label>
+                <div class="col-sm-4">
+                    <div class="fg-line ">
+                        <input type="text" class="form-control input-sm"
+                            ng-blur="verificatifyCode()" 
+                            name="code"
+                            ng-model="verificationCode" 
+                            >
+                    </div>
+                    <help-block ng-show="setForm.code.$dirty&&setForm.code.$invalid">
+                        <span style="color:red">验证码有误！</span>
+                    </help-block>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>微信</label>
                 <div class="col-sm-6">
                     <div class="fg-line">
                         <input type="text" class="form-control input-sm" name="display"
@@ -53,46 +106,46 @@
                 </div>
             </div>
              <div class="form-group">
-                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>School</label>
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>学校</label>
                 <div class="col-sm-6">
                     <div class="fg-line">
                         <input type="text" class="form-control input-sm" name="display"
                             ng-model="modal.college"
                             ng-maxlength="16"
-                            ng-minlength="6" 
+                            ng-minlength="3" 
                             required>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>College</label>
+                <label for="name" class="col-sm-4 control-label"><span style="color:red;">*</span>院系</label>
                 <div class="col-sm-6">
                     <div class="fg-line">
                         <input type="text" class="form-control input-sm" name="display"
                             ng-model="modal.depart"
                             ng-maxlength="16"
-                            ng-minlength="6" 
+                            ng-minlength="3" 
                             required>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 control-label"><span style="color:red;">*</span>Gender</label>
+                <label class="col-sm-4 control-label"><span style="color:red;">*</span>性别</label>
                 <div class="col-sm-6 p-t-10">
                     <label class="radio radio-inline  m-r-20 p-t-0">
                         <input type="radio" name="performanceFormat" ng-model="modal.sex"  value="1"   />                     
-                        boy
+                        男
                     </label>
                     <label class="radio radio-inline  m-r-20 p-t-0">
                         <input type="radio" name="performanceFormat" ng-model="modal.sex"  value="2"   />                    
-                        girl
+                        女
                     </label>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-info" ng-click="confirm()" ng-disabled="setForm.$pristine||(setForm.$dirty&&setForm.$invalid)">OK</button>
-        <button type="button" class="btn btn-info" ng-click="$close()">cancel</button>
+        <button type="button" class="btn btn-info" ng-click="confirm()" ng-disabled="setForm.$pristine||(setForm.$dirty&&setForm.$invalid)||pwdNotEqualShow">确定</button>
+        <button type="button" class="btn btn-info" ng-click="$close()">取消</button>
     </div>
 </div>

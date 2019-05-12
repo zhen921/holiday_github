@@ -92,10 +92,13 @@ public class Plan{
 
 	//作为登录后消息里推荐人的计划显示
 	public String getMatchInfor() {
-		//拿到的是学号的列表
-		List<String> lists=new Register().getList();
+		//拿到的是学号的列表 
+		/*
+		 * 应该从缓存中获取
+		 */
+//		List<String> lists=new Register().getList();
 		//匹配到的是这些人的计划，到前台做展示
-		this.matchList = service.getRecom(lists);
+//		this.matchList = service.getRecom(lists);
 		return "open_recom";
 	}
 

@@ -87,7 +87,7 @@ public class ReleaseServiceImpl implements ReleaseService {
 				if(type.getHot()>80){
 					String email=dao.informMatch(type.getSno(),sno);
 					if(email!=null)
-						sendEmail.sendEmai(email);
+						sendEmail.sendEmai(email,false,"");
 				}
 			}
 	}

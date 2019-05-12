@@ -12,21 +12,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import user.dto.UserInforDTO;
+import user.logiccompute.SendInformEmail;
 import user.model.UserInfor;
+import user.model.UserPlan;
 import user.service.UserInforService;
 
 @Controller
 @Component("login")
 @Scope("prototype")
 public class Register {
-	UserInfor userInfor;
 	UserInforService service;
+	SendInformEmail sendEmail=new SendInformEmail();
 	
-	//用于存放通知
-	static List<String> list=new ArrayList<String >();
 	
 	//用户注册
 	@RequestMapping(value="/register",method = RequestMethod.POST,consumes = "application/json",produces="application/json")
@@ -48,30 +49,22 @@ public class Register {
 		return service.loginCheck(user);
 	}
 
-
-	public UserInfor getUserInfor() {
-		return userInfor;
+	 // 如果有发布计划则获取匹配列表
+	@RequestMapping(value="/getEmailVerificationCode",method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public void getEmailVerificationCode(@RequestParam(value="tempVerificationCode") String tempVerificationCode,@RequestParam(value="email") String email) throws Exception {
+		sendEmail.sendEmai(email, true, tempVerificationCode);
 	}
-
-	public void setUserInfor(UserInfor userInfor) {
-		this.userInfor = userInfor;
-	}
+	
 
 	public UserInforService getService() {
 		return service;
 	}
-
 	@Resource(name = "userInforImpl")
 	public void setService(UserInforService service) {
 		this.service = service;
 	}
 
-	public List<String> getList() {
-		return list;
-	}
-
-	public void setList(List<String> list) {
-		this.list = list;
-	}
 
 }

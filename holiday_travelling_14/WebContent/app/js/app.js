@@ -11,7 +11,9 @@ var myApp=angular.module('myApp', [
     'ui.grid.pagination',
     'ui.grid.resizeColumns',
     'ui.grid.autoResize',
-    'ui.grid.selection'
+    'ui.grid.selection',
+    'ngFileUpload',
+    'ui.bootstrap.contextMenu'
 ]);
 
 myApp.config(function ($stateProvider, $urlRouterProvider) {
