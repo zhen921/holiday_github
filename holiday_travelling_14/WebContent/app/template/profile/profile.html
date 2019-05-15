@@ -2,12 +2,13 @@
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-block">
-                                <center class="m-t-30"> <img src="lib/assets/images/users/5.jpg" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">Hanna Gover</h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                                <center class="m-t-30"> <img ng-src="img/avatar/{{modal.photopath}}" class="img-circle" width="150" />
+                                    <h4 class="card-title m-t-10">{{modal.nickName}}</h4>
                                     <button class="btn btn-info" 
                                         ngf-select
-                                        ngf-change="uploadFile($file)" 
+                                        ngf-change="uploadPhotoName($file)"
+                                        ngf-pattern="'image/*'"
+                                        ngf-multiple="false"
                                         name="file" 
                                         ngf-max-size="20MB" 
                                         ngf-min-height="100">上传头像</button>
@@ -21,23 +22,35 @@
                             <div class="card-block">
                                 <form class="form-horizontal form-material" role="form" name="setForm">
                                     <div class="form-group">
-                                        <label class="col-md-12">Sno</label>
+                                        <label class="col-md-12">学号</label>
                                         <div class="col-md-12">
                                             <input type="text" 
                                                 ng-model=modal.sno
+                                                class="form-control form-control-line"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">昵称</label>
+                                        <div class="col-md-12">
+                                            <input type="text" 
+                                                ng-model=modal.nickName
                                                 class="form-control form-control-line"
                                                 >
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Gender</label>
+                                        <label class="col-md-12">性别</label>
                                         <div class="col-md-12">
-                                                <input type="radio" class="radio radio-inline" name="isAuto" ng-model="modal.sex" value="1" />是
-                                                 <input type="radio" class="radio radio-inline" name="isAuto" ng-model="modal.sex" value="2" />否
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.sex">
+                                                <option ng-repeat="item in genderList" 
+                                                    value={{item.value}}>{{item.name}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="example-email" class="col-md-12">Email</label>
+                                        <label for="example-email" class="col-md-12">邮箱</label>
                                         <div class="col-md-12">
                                             <input type="email" 
                                                 ng-model=modal.email
@@ -49,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Wechat</label>
+                                        <label class="col-md-12">微信</label>
                                         <div class="col-md-12">
                                             <input type="text" 
                                                 value="wechat" 
@@ -59,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">College</label>
+                                        <label class="col-md-12">学校</label>
                                         <div class="col-md-12">
                                             <input type="text" 
                                                 ng-model=modal.college
@@ -68,7 +81,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Depart</label>
+                                        <label class="col-md-12">院系</label>
                                         <div class="col-md-12">
                                             <input type="text" 
                                                 ng-model=modal.depart
@@ -77,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">Introduce</label>
+                                        <label class="col-md-12">个性宣言</label>
                                         <div class="col-md-12">
                                             <textarea rows="5"
                                                 ng-model=modal.introduce 
@@ -88,10 +101,10 @@
                                         <div class="col-sm-12">
                                             <button class="btn btn-success" 
                                                 ng-click="updateProfile()" 
-                                                ng-disabled="setForm.$pristine||(setForm.$dirty&&setForm.$invalid)"
-                                                >Update Profile</button>
+                                                ng-disabled="setForm.$dirty&&setForm.$invalid"
+                                                >保存修改</button>
                                         <a href="" style="position:absolute; padding-left: 60px;line-height: 2;padding-top: 13px;font-size: 15px;font-weight: 400;font-style: italic;text-decoration:underline"
-                                            ng-click="modifyPwd()">Modify Password</a>
+                                            ng-click="modifyPwd()">修改密码</a>
                                         </div>
                                     </div>
                                 </form>

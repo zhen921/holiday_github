@@ -31,4 +31,13 @@ public class PersonInforDaoImpl implements PersonInforDao{
 	public void saveProfileBySno(UserInfor profile) {
 		hibernateTemplate.update(profile);
 	}
+	/* (non-Javadoc)
+	 * @see user.dao.PersonInforDao#clearInformBySno(java.lang.String)
+	 */
+	@Override
+	public void clearInformBySno(String sno) {
+		UserInfor user=(UserInfor) hibernateTemplate.find("from UserInfor u where u.sno='"+sno+"'").get(0);
+		user.setInform(0);
+		hibernateTemplate.update(user);
+	}
 }

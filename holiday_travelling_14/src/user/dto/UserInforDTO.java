@@ -7,11 +7,12 @@ public class UserInforDTO {
 	private String sno;
 	private String role;
 	private  int sex;
-	private String inform;
-	public String getInform() {
+	private int inform;
+
+	public int getInform() {
 		return inform;
 	}
-	public void setInform(String inform) {
+	public void setInform(int inform) {
 		this.inform = inform;
 	}
 	public String getSno() {

@@ -24,6 +24,13 @@ import user.service.PersonInforService;
 public class Personal{
 	private PersonInforService service;
 
+	
+	@RequestMapping(value="/clearInform",method = RequestMethod.PUT,produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public  void clearInformBySno(@RequestParam String sno){
+			service.clearInformBySno(sno);
+	}
 	/**
 	 * @author yuwei wang
 	 * @param sno

@@ -21,24 +21,17 @@ public class ComputeMatch {
 		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 			int sum=0;
 			UserPlan plan = (UserPlan) iterator.next();
-			/*
-			 * 市
-			 */
+			//城市
 			if(userPlan.getCity().equals(plan.getCity())){
 				sum=sum+2;
 			}
 			
-			/*
-			 * view
-			 * 调用封装的函数匹配关键字
-			 */
+		    //调用封装的函数匹配关键字
 			if(kwu.getKeyWord(userPlan.getView(), plan.getView())){
 				sum=sum+2; 	
 			}
 			
-			/*
-			 * totalperson
-			 */
+			// totalperson
 			if(userPlan.getTotalperson()==plan.getTotalperson()){
 				sum=sum+2; 
 			}else{
@@ -50,9 +43,7 @@ public class ComputeMatch {
 				
 			}
 			
-			/*
-			 * totaltime
-			 */
+			//totaltime
 			if(userPlan.getTotaltime()==plan.getTotaltime()){
 				sum=sum+2; 
 			}else{

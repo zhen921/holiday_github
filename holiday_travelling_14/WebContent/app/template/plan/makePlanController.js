@@ -95,19 +95,23 @@ myApp.controller('makePlanController',makePlanController);
             columnDefs : [
                 {
                     field : 'title',
-                    displayName : 'title'
+                    displayName : '标题'
                 },
                 {
                     field : 'province',
-                    displayName : 'province'
+                    displayName : '目的省份'
                 },
                 {
                     field : 'city',
-                    displayName : 'city'
+                    displayName : '目的城市'
                 },
                 {
                     field : 'view',
-                    displayName : "view"
+                    displayName : "景点"
+                },
+                {
+                    field : "hot",
+                    displayName : "匹配得分"
                 }
             ],
             onRegisterApi: function(gridApi) {

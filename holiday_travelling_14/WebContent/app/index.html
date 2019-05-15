@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="lib/assets/images/favicon.png">
     <title></title>
     <link href="lib/css/bootstrap.min.css" rel="stylesheet">
     <link href="lib/css/style.css" rel="stylesheet">
@@ -23,19 +22,17 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <div id="main-wrapper">
-        <header class="topbar">
+        <header class="topbar" style="height:81px;">
             <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
                 <div class="navbar-header" style="padding-bottom: 31px;padding-top: 0px;border-bottom-style: solid;border-bottom-width: 0px;">
                     <a class="navbar-brand" href="index.html">
                         <b>
-                            <img src="lib/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="lib/assets/images/logo.png" alt="homepage" class="dark-logo" style="height:80px;width:240px;margin-left: -15px;"/>
                         </b>
-                        <span>
-                            <img src="lib/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                        </span> </a>
+                       
                 </div>
                 <div class="navbar-collapse">
-                    <ul class="navbar-nav mr-auto mt-md-0 " style="padding-left: 500px;padding-top:10px">
+                    <ul class="navbar-nav mr-auto mt-md-0 " style="padding-left: 450px;padding-top:10px">
                         <li class="nav-item"> <a
                                 class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
@@ -48,10 +45,21 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left: 100px;"><img
-                                    src="lib/assets/images/users/1.jpg" alt="user" class="profile-pic m-r-5" />Markarn
-                                Doe</a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" 
+                                data-ui-sref='profile'
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;"><img
+                                    src="img/avatar/{{modal.photopath}}" alt="user" class="profile-pic m-r-5" />{{modal.nickName}}
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" 
+                                data-ui-sref='makePlan'
+                                data-ng-click="clearInform()" 
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-left: 10px;"><img
+                                    src="img/{{informPath}}" alt="user" class="profile-pic m-r-5" />
+                            </a>
                         </li>
                     </ul>
                 </div>

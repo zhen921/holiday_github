@@ -14,4 +14,10 @@ public interface PersonInforService {
 	 */
 	public void saveProfileBySno(UserInfor profile);
 
+
+	/**
+	 * @param sno
+	 */
+	public void clearInformBySno(String sno);
+
 }

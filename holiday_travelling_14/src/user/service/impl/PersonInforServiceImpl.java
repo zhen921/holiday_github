@@ -38,5 +38,14 @@ public class PersonInforServiceImpl implements PersonInforService{
 		dao.saveProfileBySno(profile);
 		// TODO Auto-generated method stub
 	}
+
+	/* (non-Javadoc)
+	 * @see user.service.PersonInforService#clearInformBySno(java.lang.String)
+	 */
+	@Override
+	@Transactional
+	public void clearInformBySno(String sno) {
+		dao.clearInformBySno(sno);
+	}
 	
 }

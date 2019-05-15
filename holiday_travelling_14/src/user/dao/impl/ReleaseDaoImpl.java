@@ -68,8 +68,7 @@ public class ReleaseDaoImpl implements ReleaseDao {
 	@Override
 	public String informMatch(String sno, String sno2) {
 		UserInfor user=(UserInfor) hibernateTemplate.find("from UserInfor u where u.sno = '" + sno + "'").get(0);
-			String str=user.getInform()+","+sno2;
-			user.setInform(str);
+			user.setInform(1);
 			this.hibernateTemplate.update(user);
 		return user.getEmail();
 	}

@@ -1,13 +1,17 @@
 myApp.controller('profileController',profileController);
 function profileController($scope,$http,$log,$uibModal) {
-	   	getProfile();
+			 getProfile();
+			 $scope.genderList=[
+				{"value":1,"name":"男"},
+				{"value":2,"name":"女"}
+			];
 	   	$scope.updateProfile = updateProfile;
 	   	$scope.modifyPwd = modifyPwd;
-		$scope.uploadFile = uploadFile
+		  $scope.uploadPhotoName = uploadPhotoName;
 		
-		function uploadFile($file) {
-			$scope.file=$file;
-			$scope.fileName = $file[0].name;
+		function uploadPhotoName($file) {
+			$scope.modal.photopath=$file.name;
+			swal({title:'添加成功',text:'请点击‘保存修改’确认上传',type:'success'});
 		};
 
 		function updateProfile(){
@@ -40,7 +44,7 @@ function profileController($scope,$http,$log,$uibModal) {
 			  });
 		}
 
-	    function getProfile(){
+	  function getProfile(){
 		    //get session data
 		    str = sessionStorage.stu; 
 		    obj = JSON.parse(str);
@@ -51,6 +55,7 @@ function profileController($scope,$http,$log,$uibModal) {
 		    })
 		    .success(function (data, status) {
 				 $scope.modal=data;
+				 $scope.modal.sex = $scope.modal.sex+"";
 		    })
 		    .error(function (data, status) {
 		       $log.info("Failed to get data; status:" + status);

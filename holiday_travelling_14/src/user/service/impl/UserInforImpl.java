@@ -25,7 +25,6 @@ public class UserInforImpl implements UserInforService{
 	@Override
 	@Transactional   //进行写操作之前先加事务
 	public void addUser(UserInfor u) {
-		u.setInform("abc");
 		dao.addUser(u);
 	}
 

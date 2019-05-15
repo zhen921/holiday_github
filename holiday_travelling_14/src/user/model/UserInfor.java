@@ -11,16 +11,29 @@ public class UserInfor {
 	private String sno;
 	private String pwd ;
 	private  int sex;
+	private String nickName;
 	private String email;
 	private String wechat;
 	private String college ;
 	private String depart;
 	private String photopath ;
 	private String introduce ;
-	private String inform ;
+	private int inform ;
 	@Id
 	public String getSno() {
 		return sno;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public int getInform() {
+		return inform;
+	}
+	public void setInform(int inform) {
+		this.inform = inform;
 	}
 	public void setSno(String sno) {
 		this.sno = sno;
@@ -72,12 +85,6 @@ public class UserInfor {
 	}
 	public void setIntroduce(String introduce) {
 		this.introduce = introduce;
-	}
-	public String getInform() {
-		return inform;
-	}
-	public void setInform(String inform) {
-		this.inform = inform;
 	}
 	
 }
