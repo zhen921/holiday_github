@@ -34,4 +34,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'template/plan/makePlan.html',
         controller : 'makePlanController'
     })
+    .state ('match', {
+        url: '/match',
+        templateUrl: 'template/cluster/cluster.html',
+        controller : 'clusterController'
+    })
  });

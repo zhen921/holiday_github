@@ -24,6 +24,8 @@ public class MultiCluster {
 		kernal.clear();
 		data.clear();
 	}
+	
+	//将需要聚类的数据封装成点，放到data中
 	public static  void createData(List<PersonalTag> list){
 		for (Iterator iterator = list.iterator(); iterator.hasNext();) {
 			PersonalTag personalTag = (PersonalTag) iterator.next();
@@ -36,6 +38,7 @@ public class MultiCluster {
 
 	}
 
+	//首先选取四个簇心点
 	public static List<double[]> setKernal(List<double[]> list, int a, int b, int c,int d) {
 		kernal.add(list.get(a));
 		kernal.add(list.get(b));
@@ -43,14 +46,8 @@ public class MultiCluster {
 		kernal.add(list.get(d));
 		return kernal;
 	}
-	/**
-	 * ���뵥����ݣ����������abc,����ŷ�������̵ı��
-	 * @param cluster
-	 * @param a
-	 * @param b
-	 * @param c
-	 * @return
-	 */
+
+	//计算每个点到簇心的距离
 	public static int getDistance(double[] cluster,double[]  a,double[] b,double[] c,double[] d){
 		double da,db,dc,dd;
 		da=(cluster[0]-a[0])*(cluster[0]-a[0])+(cluster[1]-a[1])*(cluster[1]-a[1])+(cluster[2]-a[2])*(cluster[2]-a[2]);
@@ -69,10 +66,7 @@ public class MultiCluster {
 	}
 	
 	/**
-	 * ������ݣ��ͳ�ʼ���ģ��������µĺ���
-	 * @param data
-	 * @param list
-	 * @return
+
 	 */
 	public static List<double[]> reComputeCluster(List<double[]> data,List<double[]> list){
 		

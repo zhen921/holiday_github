@@ -24,5 +24,6 @@
         +'<script src="mainPageController.js"></script>'
         +'<script src="template/profile/profileController.js"></script>'
         +'<script src="template/plan/makePlanController.js"></script>'
+        +'<script src="template/cluster/clusterController.js"></script>'
          );
     
