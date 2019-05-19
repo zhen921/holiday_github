@@ -8,7 +8,14 @@ public class UserInforDTO {
 	private String role;
 	private  int sex;
 	private int inform;
+	private String college;
 
+	public String getCollege() {
+		return college;
+	}
+	public void setCollege(String college) {
+		this.college = college;
+	}
 	public int getInform() {
 		return inform;
 	}

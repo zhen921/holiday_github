@@ -1,7 +1,11 @@
-                <div class="row">
+<div class="ui raised segment">
+        <div class="ui blue ribbon label" style="width:180px;height:40px;font-size: 1.3rem;letter-spacing: 0.459em;">
+            <i class="address card icon" style="font-size: 1.2em;"></i>个人主页
+        </div>
+               <div class="row">
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
-                            <div class="card-block">
+                            <div class="card-block" style="padding-top: 10px;">
                                 <center class="m-t-30"> <img ng-src="img/avatar/{{modal.photopath}}" class="img-circle" width="150" />
                                     <h4 class="card-title m-t-10">{{modal.nickName}}</h4>
                                     <button class="btn btn-info" 
@@ -19,7 +23,7 @@
            
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div>
-                            <div class="card-block">
+                            <div class="card-block" style="padding-top: 50px;">
                                 <form class="form-horizontal form-material" role="form" name="setForm">
                                     <div class="form-group">
                                         <label class="col-md-12">学号</label>
@@ -99,7 +103,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success" 
+                                            <button class="btn btn-info" 
                                                 ng-click="updateProfile()" 
                                                 ng-disabled="setForm.$dirty&&setForm.$invalid"
                                                 >保存修改</button>
@@ -113,4 +117,4 @@
                     </div>
                 </div>
          
-
+</div>

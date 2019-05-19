@@ -20,7 +20,14 @@ public class UserPlan {
 	private String introduce;
 	private int selfsex;
 	private int hot;
+	private int id;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Id
 	public String getSno() {
 		return sno;

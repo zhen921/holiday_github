@@ -30,6 +30,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     })
     .state ('makePlan', {
         url: '/makePlan',
+        params:{'sno':null},
         templateUrl: 'template/plan/makePlan.html',
         controller : 'makePlanController'
     })

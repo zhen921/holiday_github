@@ -5,15 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.persistence.Query;
+import javax.mail.Session;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
 
 import user.dao.ReleaseDao;
-import user.hibernate.util.HibernateUtil;
+import user.dto.userAndPlan;
 import user.model.City;
 import user.model.HistoryPlan;
 import user.model.Province;
@@ -23,6 +22,7 @@ import user.model.UserPlan;
 @Component
 public class ReleaseDaoImpl implements ReleaseDao {
 	private HibernateTemplate hibernateTemplate;
+
 
 	//get province list
 	@Override
@@ -85,6 +85,18 @@ public class ReleaseDaoImpl implements ReleaseDao {
 		return recom;
 	}
 
+	//联表查询
+		@Override
+		public List<userAndPlan> getLatestPlan(String college,int index) {
+			org.hibernate.classic.Session session= hibernateTemplate.getSessionFactory().openSession();
+		    final Query query = session.createQuery("SELECT p.sno,p.view,p.title,p.startdate,p.introduce,u.depart,u.photopath,u.nickName,u.sex " +
+					"FROM UserPlan as p , UserInfor as u where p.sno=u.sno and u.college='"+college+"' ORDER BY p.id DESC");
+		    query.setMaxResults(3);
+		    query.setFirstResult(index);
+		    List<userAndPlan> list=query.list();
+		    session.close();
+		    return list;
+		}
 
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
@@ -94,5 +106,7 @@ public class ReleaseDaoImpl implements ReleaseDao {
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
+
+	
 
 }

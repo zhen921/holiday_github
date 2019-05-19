@@ -1,16 +1,25 @@
 myApp.controller('makePlanController',makePlanController);
-    function makePlanController($scope,$http,$log,$uibModal){
+    function makePlanController($scope,$http,$log,$uibModal,$state,$stateParams){
         $scope.modal={};
         $scope.modal.province="内蒙古";
         $scope.modal.companysex="1";
         $scope.modal.totalcost="1";
+        $scope.modal.startdate="1";
         var obj = JSON.parse(sessionStorage.stu);
         $scope.modal.sno  = obj.sno;
         $scope.modal.selfsex  = obj.sex;
         $scope.tableShow=false;
         $scope.viewPlan=true;
-        checkExistPlan();
-       
+
+        //判断是否从首页路由查看发布计划的
+        if($stateParams.sno == null)
+            checkExistPlan();
+        else{
+            $scope.viewPlan=false;
+            tableIntoModifyPlan($stateParams.sno);
+        }
+            
+
         $scope.matchData=[{"sno":"123456","province":"内蒙古","companysex":2,"city":"呼和浩特市","view":"农大","totalperson":2,"totaltime":2,"totalcost":1,"startdate":1,"title":"谨慎","introduce":"按时\t\t\t\t\t\t\t","selfsex":2,"hot":68},
        /*  {"sno":"20001","province":"内蒙古","companysex":2,"city":"呼和浩特市","view":"农大","totalperson":1,"totaltime":2,"totalcost":1,"startdate":1,"title":"相约农大","introduce":"是\t","selfsex":1,"hot":56},
         {"sno":"2001","province":"内蒙古","companysex":3,"city":"呼和浩特市","view":"成吉思汗陵","totalperson":2,"totaltime":1,"totalcost":1,"startdate":1,"title":"成吉思汗","introduce":null,"selfsex":2,"hot":62},
@@ -62,6 +71,13 @@ myApp.controller('makePlanController',makePlanController);
             {"value":2,"name":"girl"},
             {"value":3,"name":"whatever"}
         ];
+        $scope.startDate=[
+            {"value":1,"name":"本周周末"},
+            {"value":2,"name":"下周周末"},
+            {"value":3,"name":"第三周周末"},
+            {"value":4,"name":"第四周周末"}
+        ];
+
         $scope.costList=[
             {"value":1,"name":"0~200"},
             {"value":3,"name":"200~400"},
@@ -73,6 +89,8 @@ myApp.controller('makePlanController',makePlanController);
         $scope.releasePlan = releasePlan;
         $scope.tableIntoModifyPlan = tableIntoModifyPlan;
         $scope.viewProfile = viewProfile;
+        $scope.rightMenu = rightMenu;
+        $scope.backToTable = backToTable;
         
         getProvinceName();
         getCityName();
@@ -122,7 +140,14 @@ myApp.controller('makePlanController',makePlanController);
             }
         };
 
-        $scope.rightMenu = rightMenu;
+        function backToTable(){
+            if($stateParams.sno != null){
+                $state.go('dashboard',null);
+                return;
+            }
+            $scope.tableShow=true;
+        }
+       
         function rightMenu(row){
             $scope.gridApi.selection.clearSelectedRows();
             $scope.gridApi.selection.selectRow(row.entity);
@@ -130,7 +155,7 @@ myApp.controller('makePlanController',makePlanController);
                 ['查看详细计划',function($itemScope,$event){
                     $scope.tableIntoModifyPlan(row.entity.sno);
                 }],
-                ['打开个人主页',function($itemScope,$event){
+                ['查看个人简介',function($itemScope,$event){
                     $scope.viewProfile(row.entity.sno);
                 }]
             ];
@@ -175,6 +200,7 @@ myApp.controller('makePlanController',makePlanController);
                 $scope.tableShow=false;
                 $scope.modal.companysex = $scope.modal.companysex+"";
                 $scope.modal.totalcost = $scope.modal.totalcost+"";
+                $scope.modal.startdate = $scope.modal.startdate+"";
             })
             .error(function (data, status) {
                 $log.info();
@@ -200,6 +226,7 @@ myApp.controller('makePlanController',makePlanController);
         function releasePlan(){
             $scope.modal.companysex = parseInt($scope.modal.companysex);
             $scope.modal.totalcost = parseInt($scope.modal.totalcost);
+            $scope.modal.startdate = parseInt($scope.modal.startdate);
             var url = "/holiday_travelling_14/userback/planRelease";
             $http({
                 method: 'POST',
@@ -260,6 +287,8 @@ myApp.controller('makePlanController',makePlanController);
             }); 
             return code;
         }
+
+        
     }
     var viewProfileController = function($scope,data,$uibModalInstance){
         $scope.modal=data;

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import user.action.Register;
 import user.dao.ReleaseDao;
+import user.dto.userAndPlan;
 import user.logiccompute.ComputeMatch;
 import user.logiccompute.SendInformEmail;
 import user.model.City;
@@ -90,6 +91,13 @@ public class ReleaseServiceImpl implements ReleaseService {
 						sendEmail.sendEmai(email,false,"");
 				}
 			}
+	}
+	
+	
+
+	@Override
+	public List<userAndPlan> getLatestPlan(String college,int index) {
+		return dao.getLatestPlan(college,index);
 	}
 
 }

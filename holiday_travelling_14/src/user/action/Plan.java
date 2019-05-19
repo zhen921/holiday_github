@@ -1,6 +1,8 @@
 package user.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
+
+import user.dto.userAndPlan;
 import user.model.*;
 import user.service.ReleaseService;
 
@@ -24,8 +28,7 @@ public class Plan{
 	List<UserPlan> matchList;
 	List<UserPlan> recomList;
 	ReleaseService service;
-	UserPlan userPlan;
-
+	
 	/*
 	 * 此处是点发布计划页面进行的跳转操作，其中获得了省份列表
 	 */
@@ -62,7 +65,7 @@ public class Plan{
 		}
 	}
 	
-	 // 如果有发布计划则获取匹配列表
+	 // 查看自己的计划
 	@RequestMapping(value="/tableIntoModifyPlan",method = RequestMethod.GET,produces="application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -70,9 +73,8 @@ public class Plan{
 		return service.checkRepeatPlan(sno);
 	}
 
-	/*
-	 * 此处往数据库里写入计划，预计匹配也会写在这部分
-	 */
+	
+	 // 此处往数据库里写入计划，匹配到相似的计划
 	@RequestMapping(value="/planRelease",method = RequestMethod.POST,produces="application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -82,13 +84,24 @@ public class Plan{
 		if (selfPlan!=null && selfPlan.size() > 0) {
 			 throw new  Exception("plan exist");
 		} else {
+			//保存计划
 			service.saveReleasePlan(plan);
+			//获取匹配列表
 			List<UserPlan> matchList=service.getMatchPlan(plan);
+			//发送到邮箱
 			service.sendEmaiToMatch(matchList,plan.getSno());
 			return matchList;
 		}
 	}
 
+	//首页获取最新发布的计划以及发布人的信息
+	@RequestMapping(value="/getLatestPlan",method = RequestMethod.GET,produces="application/json")
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public List<userAndPlan> getLatestPlan(@RequestParam String college,@RequestParam int index) throws UnsupportedEncodingException {
+		String encodecollege=URLDecoder.decode(college,"UTF-8");
+		return service.getLatestPlan(encodecollege,index);
+	}
 
 	//作为登录后消息里推荐人的计划显示
 	public String getMatchInfor() {
@@ -112,13 +125,6 @@ public class Plan{
 		this.service = service;
 	}
 
-	public UserPlan getUserPlan() {
-		return userPlan;
-	}
-
-	public void setUserPlan(UserPlan userPlan) {
-		this.userPlan = userPlan;
-	}
 
 	public List<UserPlan> getMatchList() {
 		return matchList;

@@ -2,6 +2,7 @@ package user.dao;
 
 import java.util.List;
 
+import user.dto.userAndPlan;
 import user.model.City;
 import user.model.Province;
 import user.model.UserPlan;
@@ -27,6 +28,12 @@ public interface ReleaseDao {
 
 	//save plan
 	public void saveReleasePlan(UserPlan plan);
+
+	/**
+	 * @param college 
+	 * @return
+	 */
+	public List<userAndPlan> getLatestPlan(String college,int index);
 
 		
 }

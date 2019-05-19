@@ -18,6 +18,7 @@
         +'<script src="lib/ui.bootstrap.contextMenu-master/contextMenu.js"></script>'
         +'<script src="lib/ng-file-upload-master/dist/ng-file-upload.min.js"></script>'
         +'<script src="lib/ng-file-upload-master/dist/ng-file-upload-shim.js"></script>'
+        +'<script src="lib/Semantic-UI-CSS-master/semantic.min.js"></script>'
 
         +'<script src="template/dashboard/dashboardController.js"></script>'
         +'<script src="mainPageController.js"></script>'

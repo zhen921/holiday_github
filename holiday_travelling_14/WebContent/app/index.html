@@ -12,6 +12,8 @@
     <link href="lib/css/colors/blue.css" id="theme" rel="stylesheet">
     <link href="lib/sweet-alert/lib/sweet-alert.css" rel="stylesheet" >
     <link href="lib/ui-grid/ui-grid.css" rel="stylesheet">
+    <link href="lib/time-line/index.css" rel="stylesheet">
+    <link href="lib/Semantic-UI-CSS-master/semantic.min.css" rel="stylesheet">
     <script src="mainDependLib.js"></script> 
     
 </head>
@@ -25,7 +27,7 @@
         <header class="topbar" style="height:81px;">
             <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
                 <div class="navbar-header" style="padding-bottom: 31px;padding-top: 0px;border-bottom-style: solid;border-bottom-width: 0px;">
-                    <a class="navbar-brand" href="index.html">
+                    
                         <b>
                             <img src="lib/assets/images/logo.png" alt="homepage" class="dark-logo" style="height:80px;width:240px;margin-left: -15px;"/>
                         </b>
@@ -33,9 +35,6 @@
                 </div>
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0 " style="padding-left: 450px;padding-top:10px">
-                        <li class="nav-item"> <a
-                                class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <li class="nav-item hidden-sm-down">
                             <form class="app-search p-l-20">
                                 <input type="text" class="form-control" placeholder="Search for..."> <a
@@ -75,7 +74,7 @@
                                 data-ng-click="mactrl.sidebarStat($event)"
                                 class="waves-effect">
                                 <i class="fa fa-clock-o m-r-10"
-                                    aria-hidden="true"></i>Dashboard</a>
+                                    aria-hidden="true"></i>首页</a>
                         </li>
                         <li>
                             <a  data-ui-sref='profile'
@@ -83,14 +82,14 @@
                                 data-ng-click="mactrl.sidebarStat($event)" 
                                 class="waves-effect">
                                 <i class="fa fa-user m-r-10"
-                                    aria-hidden="true"></i>Profile</a>
+                                    aria-hidden="true"></i>个人</a>
                         </li>
                         <li>
                             <a  data-ui-sref='makePlan'
                                 data-ui-sref-active="active"
                                 data-ng-click="mactrl.sidebarStat($event)"
                                 class="waves-effect"><i class="fa fa-table m-r-10"
-                                    aria-hidden="true"></i>Make Plan</a>
+                                    aria-hidden="true"></i>制定旅游计划</a>
                         </li>
                         <li>
                             <a  data-ui-sref='match'
@@ -126,3 +125,9 @@
     <script src="lib/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
 </html>
+<style>
+::marker {
+    color: #00a8d1;
+    font-size: 0 em;
+}
+</style>

@@ -1,36 +1,29 @@
+<div class="ui raised segment">
+    <div class="ui blue ribbon label" ng-show="tableShow" style="width:180px;height:40px;font-size: 1.3rem;letter-spacing: 0.459em;">
+        <i class="paper plane icon" style="font-size: 1.2em;"></i>相似的计划
+    </div>
+    <div class="ui blue ribbon label" ng-show="viewPlan" style="width:180px;height:40px;font-size: 1.3rem;letter-spacing: 0.459em;">
+        <i class="align left icon" style="font-size: 1.2em;"></i>制定出游计划
+    </div>
+    <div class="ui blue ribbon label" ng-hide="viewPlan||tableShow" style="width:180px;height:40px;font-size: 1.3rem;letter-spacing: 0.459em;">
+        <i class="align left icon" style="font-size: 1.2em;"></i>计划详情
+    </div>
 
-            
-            <div ng-show="tableShow">
-                <div class="row page-titles">
-                    <div class="col-md-6 col-md-4 col-8 align-self-center">
-                        <h3 class="text-themecolor m-b-0 m-t-0">相似的计划</h3>
-                    </div>
-                </div>
-              
-                <div style="padding-left: 800px;">
-                    <button class="btn btn-info" ng-click="tableIntoModifyPlan('')">查看我的计划</button>
-                    <button class="btn btn-info" >刷新</button>
-                </div>
-                <div class="grid" ui-grid="gridOptions"
-                    ui-grid-selection 
-                    ui-grid-resize-columns 
-                    ui-grid-auto-resize 
-                    ui-grid-pagination >
-                </div>
-            </div>
+    <div ng-show="tableShow" style="padding-top:30px;">
+        <div style="padding-left: 800px;">
+            <button class="btn btn-info" ng-click="tableIntoModifyPlan('')"><i class="file alternate icon"></i>查看我的计划</button>
+            <button class="btn btn-info" ><i class="sync alternate icon"></i>刷新</button>
+        </div>
+        <div class="grid" ui-grid="gridOptions"
+            ui-grid-selection 
+            ui-grid-resize-columns 
+            ui-grid-auto-resize 
+            ui-grid-pagination >
+        </div>
+    </div>
 
-            <div class="row page-titles" ng-show="viewPlan">
-                <div class="col-md-6 col-md-4 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0" style="padding-left: 50px;">制定出游计划</h3>
-                </div>
-            </div>
-            <div class="row page-titles" ng-hide="viewPlan||tableShow">
-                <div class="col-md-6 col-md-4 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0" style="padding-left: 50px;">计划详情</h3>
-                </div>
-            </div>
             <div class="row" ng-hide="tableShow">
-                <div class="col-lg-10 col-xlg-10 col-md-10" style="padding-left: 60px;">
+                <div class="col-lg-10 col-xlg-10 col-md-10" style="padding-left: 60px;padding-top: 30px;">
                     <form class="form-horizontal form-material">
                         <div class="card">
                             <div class="card-block">
@@ -87,10 +80,11 @@
                                     <div class="form-group col-md-6">
                                         <label class="col-md-6"><span style="color:red;">*</span>出发时间:</label>
                                         <div class="col-md-12 p-t-10">
-                                            <input type="number"  
-                                                ng-model="modal.startdate"
-                                                class="form-control form-control-line"
-                                                required>
+                                            <select class="form-control form-control-line"
+                                                ng-model="modal.startdate">
+                                                <option ng-repeat="item in startDate" 
+                                                    value={{item.value}}>{{item.name}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     
@@ -173,7 +167,7 @@
                                     </div>
                                     <div class="col-md-5" style="float:right;" ng-hide="viewPlan||tableShow">
                                         <button class="btn btn-info"
-                                            ng-click="tableShow=true" 
+                                            ng-click="backToTable()" 
                                             style="padding-left: 32px;margin-left: 40px;padding-right: 32px;">
                                             返回</button>
                                     </div>
@@ -183,3 +177,4 @@
                     </form>
                 </div>
             </div>
+</div>

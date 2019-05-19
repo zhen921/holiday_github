@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import user.dao.UserInforDao;
 import user.dto.UserInforDTO;
-import user.hibernate.util.SqlSet;
 import user.model.AdminInfor;
 import user.model.UserInfor;
 
@@ -52,6 +51,7 @@ public class UserInforDaoImpl implements UserInforDao{
 			loginInfor.setSno(users.get(0).getSno()) ;
 			loginInfor.setInform(users.get(0).getInform());
 			loginInfor.setSex((users.get(0).getSex()));
+			loginInfor.setCollege(users.get(0).getCollege());
 			return loginInfor;
 		}else{
 			admin=(List<AdminInfor>) hibernateTemplate.find("from AdminInfor u where u.name = '" + userInfor.getSno() + "' "+"and u.password='"+ userInfor.getPwd()+"'");

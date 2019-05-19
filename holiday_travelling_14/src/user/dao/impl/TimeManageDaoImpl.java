@@ -33,7 +33,7 @@ public class TimeManageDaoImpl implements TimeManageDao{
 			while(rs.next()){
 					int time=rs.getInt("startdate");
 					//发布的时间是近期，不含节日
-					if(time>1&&time<4){
+					if(time>1&&time<=4){
 						ps=(PreparedStatement) conn.prepareStatement("UPDATE  user_plan    SET startdate=startdate-1 WHERE sno='"+rs.getString("sno")+"';");
 						ps.execute();
 					}else if(time<=1){
